@@ -12,6 +12,26 @@
     <!-- 扫描Controller -->
     <context:component-scan base-package="com.controller"/>
 
+    <!--静态资源的处理,css、js、jpg ..-->
+    <mvc:resources mapping="/resources/**" location="/resources/"/>
+
+    <!--配置springmvc的拦截器，可以配置多个拦截器，path：设置需要拦截的路径
+        作用 1：request请求编码转换
+            2：请求权限限制，例如，未登入用户无法访问其他页面
+    -->
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/check/login"/>
+            <bean class="com.interceptors.InterceptorFunction01"/>
+        </mvc:interceptor>
+
+        <mvc:interceptor>
+            <mvc:mapping path="/check/checkInformation"/>
+            <bean class="com.interceptors.InterceptorFunction02"/>
+        </mvc:interceptor>
+
+    </mvc:interceptors>
+
     <!-- 视图解析器 -->
     <!-- Example: prefix="/WEB-INF/jsp/", suffix=".jsp", viewname="test" ->
         "/WEB-INF/jsp/test.jsp" -->
@@ -20,5 +40,6 @@
         <property name="prefix" value="/WEB-INF/views/"/>
         <property name="suffix" value=".jsp"/>
     </bean>
+
 
 </beans>

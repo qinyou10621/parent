@@ -9,12 +9,18 @@
 <html>
 <head>
     <title>jsp</title>
-    <script type="text/javascript" src="jquery/jquery-1.11.1.js"></script>
+    <script type="text/javascript" src="../resources/jquery/jquery-1.11.1.js"></script>
+    <script type="text/javascript" src="../resources/scripts/index.js"></script>
 </head>
 <body>
 <p>
-    <input type="text" id="text01"/>
-    <input type="button" id="button01" value="登入"/>
+    用户名:<input type="text" id="username"/>
+</p>
+<p>
+    密码:&nbsp;<input type="password" id="password"/>
+</p>
+<p>
+    <input type="submit" id="submit" value="登入"/>
 </p>
 </body>
 </html>
