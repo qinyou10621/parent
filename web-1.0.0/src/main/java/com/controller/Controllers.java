@@ -21,6 +21,9 @@ import java.util.List;
 @Controller
 @RequestMapping("/check")
 public class Controllers {
+    /**
+     * 日志系统
+     */
     private Logger LOGGER = LoggerFactory.getLogger(Controllers.class);
 
     @Autowired
@@ -33,16 +36,14 @@ public class Controllers {
     }
 
     @RequestMapping("/register")
-    public String register(@RequestParam String username, @RequestParam String password) {
+    public String register(@RequestParam String username, @RequestParam String password, HttpServletRequest req) {
         /**
          * 将客户端传过来的密码进行sha256加密,存放在数据库;
          */
         String sha256Password = DigestUtils.sha256Hex(password);
-        System.out.println(username);
-        System.out.println(password);
-        System.out.println(sha256Password);
         testService.insertUser(username, sha256Password);
-        return null;
+        req.getSession().setAttribute("username", username);
+        return "login";
     }
 
     @RequestMapping("/checkInformation")

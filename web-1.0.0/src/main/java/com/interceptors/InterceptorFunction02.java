@@ -16,13 +16,14 @@ public class InterceptorFunction02 implements HandlerInterceptor {
      * false：拦截
      * Object o:表示拦截的目标对象
      */
-    public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o) throws Exception {
+    public boolean preHandle(HttpServletRequest req, HttpServletResponse res, Object o) throws Exception {
         System.out.println("preHandle2");
         /**
          * 判断用户是否登入，如果没有登入则踢到登入失败页面
          */
-        if (httpServletRequest.getSession().getAttribute("username") == null) {
-            httpServletRequest.getRequestDispatcher("/loginFail.jsp").forward(httpServletRequest, httpServletResponse);
+        System.out.print(req.getServletPath());
+        if (req.getSession().getAttribute("username") == null) {
+            req.getRequestDispatcher("/loginFail.jsp").forward(req, res);
             return false;
         }
         return true;
