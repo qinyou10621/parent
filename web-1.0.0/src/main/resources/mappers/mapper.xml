@@ -1,27 +1,31 @@
-<?xml version="1.0" encoding="UTF-8" ?>  
-<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"      
- "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+        "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
 <mapper namespace="com.dao.Mappers">
 
 
-	<select id="findClassesByName" parameterType="string" resultMap="resultMap">
+    <select id="findClassesByName" parameterType="string" resultMap="resultMap">
 		select c.*,t.*,s.* from teacher t,student s,classes c where c.teacher_id = t.id
 		and c.student_id = s.id and c.classes_name = #{classes_name}
 	</select>
 
-	<resultMap type="com.pojo.Classes" id="resultMap">
-		<id property="id" column="id" />
-		<result property="name" column="classes_name" />
-		<result property="teacher_id" column="teacher_id" />
-		<result property="student_id" column="student_id" />
-		<association property="teacher" javaType="com.pojo.Teacher">
-			<id property="id" column="id" />
-			<result property="name" column="teacher_name" />
-		</association>
-		<collection property="student" ofType="com.pojo.Student">
-			<id property="id" column="id" />
-			<result property="name" column="student_name" />
-		</collection>
-	</resultMap>
+    <resultMap type="com.pojo.Classes" id="resultMap">
+        <id property="id" column="id"/>
+        <result property="name" column="classes_name"/>
+        <result property="teacher_id" column="teacher_id"/>
+        <result property="student_id" column="student_id"/>
+        <association property="teacher" javaType="com.pojo.Teacher">
+            <id property="id" column="id"/>
+            <result property="name" column="teacher_name"/>
+        </association>
+        <collection property="student" ofType="com.pojo.Student">
+            <id property="id" column="id"/>
+            <result property="name" column="student_name"/>
+        </collection>
+    </resultMap>
+
+    <insert id="insertUser" parameterType="com.pojo.User">
+        insert into users (username,password)values(#{0},#{1});
+    </insert>
 
 </mapper>

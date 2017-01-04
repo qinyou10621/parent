@@ -10,11 +10,18 @@ import java.util.List;
 
 @Service
 public class TestServiceImpl implements TestService {
+
+
     @Autowired
     private Mappers mappers;
 
     public List<Classes> findInformation(String className) {
+
         return mappers.findClassesByName(className);
+    }
+
+    public void insertUser(String username, String password) {
+        mappers.insertUser(username, password);
     }
 
 }

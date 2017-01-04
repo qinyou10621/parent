@@ -3,15 +3,16 @@ package com.controller;
 import com.pojo.Classes;
 import com.service.TestService;
 import com.utils.JsonResult;
+import org.apache.commons.codec.digest.DigestUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -28,16 +29,31 @@ public class Controllers {
 
     @RequestMapping("/login")
     public String website() {
-        return "index";
+        return "login";
+    }
+
+    @RequestMapping("/register")
+    public String register(@RequestParam String username, @RequestParam String password) {
+        /**
+         * 将客户端传过来的密码进行sha256加密,存放在数据库;
+         */
+        String sha256Password = DigestUtils.sha256Hex(password);
+        System.out.println(username);
+        System.out.println(password);
+        System.out.println(sha256Password);
+        testService.insertUser(username, sha256Password);
+        return null;
     }
 
     @RequestMapping("/checkInformation")
     @ResponseBody
-    public JsonResult<List<Classes>> checkInformation(@RequestParam String username) {
+    public JsonResult<List<Classes>> checkInformation(@RequestParam String username, HttpServletRequest req) {
         LOGGER.info("接收到的参数班级名称 username={}", username);
         List<Classes> list = testService.findInformation(username);
         if (list != null) {
-
+            for (Classes c : list) {
+                req.getSession().setAttribute("token", c.getId());
+            }
         }
         return new JsonResult<List<Classes>>(list);
     }

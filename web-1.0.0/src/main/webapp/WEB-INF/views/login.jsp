@@ -14,13 +14,14 @@
 </head>
 <body>
 <p>
-    用户名:<input type="text" id="username"/>
+    用户名:<input type="text" id="login_username"/>
 </p>
 <p>
-    密码:&nbsp;<input type="password" id="password"/>
+    密码:&nbsp;<input type="password" id="login_password"/>
 </p>
 <p>
-    <input type="submit" id="submit" value="登入"/>
+    <input type="submit" id="login_submit" value="登入"/>
+    <input type="submit" id="register" value="注册" onclick="locationToHref('/resources/page/register.html')"/>
 </p>
 </body>
 </html>
