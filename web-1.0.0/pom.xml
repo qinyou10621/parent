@@ -66,6 +66,10 @@
             <groupId>commons-codec</groupId>
             <artifactId>commons-codec</artifactId>
         </dependency>
+        <dependency>
+            <groupId>aspectj</groupId>
+            <artifactId>aspectjlib</artifactId>
+        </dependency>
     </dependencies>
     <build>
         <finalName>web-1.0.0</finalName>
