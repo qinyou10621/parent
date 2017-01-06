@@ -2,6 +2,7 @@ package com.service;
 
 import com.dao.Mappers;
 import com.pojo.Classes;
+import com.pojo.Student;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,7 +22,13 @@ public class TestServiceImpl implements TestService {
     }
 
     public void insertUser(String username, String password) {
+
         mappers.insertUser(username, password);
     }
+
+    public void update(Student student) {
+        mappers.upDate(student);
+    }
+
 
 }

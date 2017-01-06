@@ -27,9 +27,9 @@
         <!--pointcut元素定义一个切入点，execution中的第一个星号 用以匹配方法的返回类型， 这里星号表明匹配所有返回类型。
         com.abc.dao.*.*(..)表明匹配com.abc.dao包下的所有类的所有方法 -->
         <!--execution(* 包.类.方法(参数))-->
-        <aop:pointcut id="mypointcut" expression="execution(* com.service.TestServiceImpl.*(..))"/>
+        <aop:pointcut id="myPointcut" expression="execution(* com.controller.Controllers.*(..))"/>
         <!--将定义好的事务处理策略应用到上述的切入点 -->
-        <aop:advisor advice-ref="txAdvice" pointcut-ref="mypointcut"/>
+        <aop:advisor advice-ref="txAdvice" pointcut-ref="myPointcut"/>
     </aop:config>
 
 </beans>

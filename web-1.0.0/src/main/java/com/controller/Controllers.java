@@ -1,6 +1,7 @@
 package com.controller;
 
 import com.pojo.Classes;
+import com.pojo.Student;
 import com.service.TestService;
 import com.utils.JsonResult;
 import org.apache.commons.codec.digest.DigestUtils;
@@ -32,6 +33,7 @@ public class Controllers {
 
     @RequestMapping("/login")
     public String website() {
+
         return "login";
     }
 
@@ -57,5 +59,12 @@ public class Controllers {
             }
         }
         return new JsonResult<List<Classes>>(list);
+    }
+
+    @RequestMapping("/transaction")
+    public void testTransaction() {
+        testService.update(new Student(2, "fff"));
+        System.out.println(1 / 0);
+        testService.update(new Student(3, "fff"));
     }
 }

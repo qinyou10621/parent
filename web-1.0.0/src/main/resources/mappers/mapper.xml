@@ -28,4 +28,8 @@
         insert into users (username,password)values(#{0},#{1});
     </insert>
 
+    <insert id="upDate" parameterType="com.pojo.Student">
+        update student set student_name=#{name} where id=#{id}
+    </insert>
+
 </mapper>
