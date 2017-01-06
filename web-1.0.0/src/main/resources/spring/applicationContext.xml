@@ -26,6 +26,15 @@
     <!-- 扫描包 -->
     <context:component-scan base-package="com.*"/>
 
+    <!--spring-AOP配置-->
+    <aop:config>
+        <aop:aspect id="aopTest" ref="aopTest">
+            <aop:pointcut id="pointCut" expression="execution(* com.controller.Controllers.*(..))"/>
+            <!--通知-->
+            <aop:before method="aopBefore" pointcut-ref="pointCut"/>
+        </aop:aspect>
+    </aop:config>
+
     <!-- 指定连接池 -->
     <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource"
           destroy-method="close">

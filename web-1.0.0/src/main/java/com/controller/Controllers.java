@@ -64,7 +64,7 @@ public class Controllers {
     @RequestMapping("/transaction")
     public void testTransaction() {
         testService.update(new Student(2, "fff"));
-        System.out.println(1 / 0);
+//        System.out.println(1 / 0);
         testService.update(new Student(3, "fff"));
     }
 }
