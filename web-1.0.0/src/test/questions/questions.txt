@@ -1,4 +1,4 @@
 1. index.js中var url = "../../check/register";浏览器访问正常有数据，但总是404;
 2. mapper.xml中配置的insertUser向数据库插入数据insert into users (username,password)values(#{0},#{1});中#{0}不能写成#{username}
    否则报Parameter username not found. Available parameters are [1, 0, param1, param2]
-3.
+3. 图片验证码问题，未解决！
