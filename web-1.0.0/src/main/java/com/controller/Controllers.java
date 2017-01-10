@@ -3,7 +3,8 @@ package com.controller;
 import com.pojo.Classes;
 import com.pojo.Student;
 import com.service.TestService;
-import com.utils.JsonResult;
+import com.utils.feedback.JsonResult;
+import com.utils.imageIdentifying.ValidateCode;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,8 +14,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.ServletConfig;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * Created by Administrator on 2016/12/27 0027.
@@ -33,7 +39,7 @@ public class Controllers {
 
     @RequestMapping("/login")
     public String website() {
-
+//        System.out.println(1 / 0);
         return "login";
     }
 
@@ -61,10 +67,31 @@ public class Controllers {
         return new JsonResult<List<Classes>>(list);
     }
 
+    /**
+     * 测试spring事务
+     */
     @RequestMapping("/transaction")
     public void testTransaction() {
         testService.update(new Student(2, "fff"));
-//        System.out.println(1 / 0);
         testService.update(new Student(3, "fff"));
+    }
+
+    /**
+     * image图片验证码
+     */
+    @RequestMapping("/identifyingCode")
+    public void identifyingCode(HttpServletRequest req, HttpServletResponse res) {
+        ValidateCode vCode = new ValidateCode(70, 25);
+        String codePath = "images" + File.separator + "imageCode" + File.separator + UUID.randomUUID().toString() +
+                ".png";
+        System.out.println(req.getServletContext().getRealPath(""));
+        try {
+            vCode.write(req.getServletContext().getRealPath("") + File.separator + codePath);
+            req.getSession().setAttribute("identifyingCode", vCode.getCode());
+            res.getWriter().print(File.separator + codePath);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

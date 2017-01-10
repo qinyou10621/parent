@@ -23,5 +23,13 @@
     <input type="submit" id="login_submit" value="登入"/>
     <input type="submit" id="register" value="注册" onclick="locationToHref('/resources/page/register.html')"/>
 </p>
+
+<table>
+    <tr>
+        <td>图片验证码：</td>
+        <td><input type="text" id="inputImageCode"/></td>
+        <td><img src="" id="imageCode" alt="identifying code" title="click change image!"/></td>
+    </tr>
+</table>
 </body>
 </html>

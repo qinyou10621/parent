@@ -27,6 +27,7 @@ public class TestServiceImpl implements TestService {
     }
 
     public void update(Student student) {
+
         mappers.upDate(student);
     }
 

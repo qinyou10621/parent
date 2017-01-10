@@ -1,6 +1,9 @@
 $(document).ready(function () {
-    $("#login_submit").click(login_submit)
-    $("#register_submit").click(register_submit)
+    $("#login_submit").click(login_submit);
+    $("#register_submit").click(register_submit);
+    $("#imageCode").on('click', changeImageCode);
+    changeImageCode();
+
 });
 
 function login_submit() {
@@ -13,6 +16,8 @@ function login_submit() {
     $.post(url, data, function (result) {
         if (0 == result.status) {
             $("#submit").after("<b>成功接收返回参数</b>");
+        } else {
+            window.location.href = '../../resources/page/loginFail.html';
         }
     });
 }
@@ -28,5 +33,14 @@ function register_submit() {
     var data = {username: $("#register_username").val(), password: $("#register_password").val()};
     $.post(url, data, function () {
     });
+}
+
+function changeImageCode() {
+    var url = "identifyingCode";
+    var data = "";
+    $.post(url, data, function (imageCodePath) {
+        $('imageCode').attr("src", imageCodePath)
+        console.log(imageCodePath)
+    })
 }
 

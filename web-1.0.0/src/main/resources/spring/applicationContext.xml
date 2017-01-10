@@ -32,6 +32,7 @@
             <aop:pointcut id="pointCut" expression="execution(* com.controller.Controllers.*(..))"/>
             <!--通知-->
             <aop:before method="aopBefore" pointcut-ref="pointCut"/>
+            <aop:after-throwing method="aopException" pointcut-ref="pointCut"/>
         </aop:aspect>
     </aop:config>
 

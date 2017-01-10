@@ -21,11 +21,10 @@ public class InterceptorFunction02 implements HandlerInterceptor {
         /**
          * 判断用户是否登入，如果没有登入则踢到登入失败页面
          */
-        System.out.println(req.getServletPath());
-        System.out.println(req.getContextPath() + "11111");
+        System.out.println(req.getRequestURL());
         if (req.getSession().getAttribute("username") == null) {
 //            req.getRequestDispatcher("/WEB-INF/views/loginfail.jsp").forward(req, res);
-            res.sendRedirect(req.getContextPath() + "/WEB-INF/views/loginfail.jsp");
+//            res.sendRedirect(req.getContextPath() + "/WEB-INF/views/loginfail.jsp");
             return false;
         }
         return true;

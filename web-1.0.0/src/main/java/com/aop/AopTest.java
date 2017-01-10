@@ -8,6 +8,10 @@ import org.springframework.stereotype.Component;
 @Component
 public class AopTest {
     public void aopBefore() {
-        System.out.println("AopAspectBefore");
+        System.out.println("aop:before");
+    }
+
+    public void aopException() {
+        System.out.println("aop:after-throwing");
     }
 }
