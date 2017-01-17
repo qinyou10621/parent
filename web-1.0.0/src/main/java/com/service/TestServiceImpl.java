@@ -21,7 +21,7 @@ public class TestServiceImpl implements TestService {
     private ShardedJedisPool sharedJedisPool;
 
     @Autowired
-    private JedisCluster aa;
+    private JedisCluster jedisCluster;
 
     /**
      * 测试redis客户端读写redis缓存
@@ -32,7 +32,7 @@ public class TestServiceImpl implements TestService {
     }
 
     public void redisTestCluster() {
-
+        jedisCluster.set("key2","222");
     }
 
     public List<Classes> findInformation(String className) {

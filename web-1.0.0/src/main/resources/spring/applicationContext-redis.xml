@@ -23,7 +23,14 @@
         </constructor-arg>
     </bean>
 
-    <bean id="jedisCluster" class="redis.clients.jedis.JedisCluster">
+    <!---->
+    <bean id="hostAndPort" class="redis.clients.jedis.HostAndPort">
+        <constructor-arg index="0" value="192.168.24.20"/>
+        <constructor-arg index="1" value="6379"/>
+    </bean>
 
+    <!---->
+    <bean id="jedisCluster" class="redis.clients.jedis.JedisCluster">
+        <constructor-arg index="0" ref="hostAndPort"/>
     </bean>
 </beans>
