@@ -76,6 +76,12 @@ public class Controllers {
         testService.update(new Student(3, "fff"));
     }
 
+    @RequestMapping("/redis")
+    public void redisTest() {
+        testService.redisSetTestMS("key101", "qinyou");
+        testService.redisGetTestMS("key100");
+    }
+
     /**
      * image图片验证码
      */

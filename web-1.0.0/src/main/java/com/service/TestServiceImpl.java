@@ -20,21 +20,30 @@ public class TestServiceImpl implements TestService {
     @Autowired
     private ShardedJedisPool sharedJedisPool;
 
-    @Autowired
-    private JedisCluster jedisCluster;
+//    @Autowired
+//    private JedisCluster jedisCluster;
 
     /**
-     * 测试redis客户端读写redis缓存
+     * 测试单redis客户端读写redis缓存
      */
-    public void redisTestMS() {
+    public void redisSetTestMS(String key, String value) {
         ShardedJedis shardeJedis = sharedJedisPool.getResource();
-        shardeJedis.set("key1", "abc");
+        shardeJedis.set(key, value);
     }
 
-    public void redisTestCluster() {
-        jedisCluster.set("key2","222");
+    public void redisGetTestMS(String key) {
+        ShardedJedis shardeJedis = sharedJedisPool.getResource();
+        String result = shardeJedis.get(key);
+        System.out.println(result);
     }
 
+    /**
+     * 测试redis集群写功能
+     */
+//    public void redisTestCluster(String key, String value) {
+//
+//        jedisCluster.set(key, value);
+//    }
     public List<Classes> findInformation(String className) {
 
         return mappers.findClassesByName(className);

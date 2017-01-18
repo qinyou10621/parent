@@ -2,6 +2,7 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <!--redis连接池的设置-->
     <bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">
         <property name="maxTotal" value="8"/>
         <property name="maxIdle" value="8"/>
@@ -11,26 +12,32 @@
         <property name="timeBetweenEvictionRunsMillis" value="30000"/>
     </bean>
 
+    <!--redis访问客户端-->
     <bean id="shardeJedisPool" class="redis.clients.jedis.ShardedJedisPool">
+        <!--构造函数的第一个参数是连接池-->
         <constructor-arg index="0" ref="jedisPoolConfig"/>
+        <!--构造函数的第二个参数-->
         <constructor-arg index="1">
             <list>
                 <bean id="jedisShardInfo" class="redis.clients.jedis.JedisShardInfo">
-                    <constructor-arg index="0" value="192.168.24.128"/>
+                    <constructor-arg index="0" value="192.168.24.21"/>
                     <constructor-arg index="1" value="6379" type="int"/>
                 </bean>
             </list>
         </constructor-arg>
     </bean>
 
-    <!---->
+    <!--redis集群JedisCluster构造函数内的参数,redis集群客户端
     <bean id="hostAndPort" class="redis.clients.jedis.HostAndPort">
-        <constructor-arg index="0" value="192.168.24.20"/>
+        <constructor-arg index="0" value="192.168.24.21"/>
         <constructor-arg index="1" value="6379"/>
     </bean>
 
-    <!---->
     <bean id="jedisCluster" class="redis.clients.jedis.JedisCluster">
         <constructor-arg index="0" ref="hostAndPort"/>
     </bean>
+
+	-->
+
+
 </beans>
