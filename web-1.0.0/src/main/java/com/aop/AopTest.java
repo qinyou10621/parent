@@ -13,5 +13,6 @@ public class AopTest {
 
     public void aopException() {
         System.out.println("aop:after-throwing");
+
     }
 }
